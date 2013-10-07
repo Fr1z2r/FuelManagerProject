@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<GridLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="183dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Last Average: "
+        android:id="@+id/textView"
+        android:layout_row="0"
+        android:layout_column="0" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/textView2"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:layout_columnSpan="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/textViewAvg"
+        android:layout_row="2"
+        android:layout_column="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/textViewLast5"
+        android:layout_row="1"
+        android:layout_column="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Last 5: "
+        android:id="@+id/textView3"
+        android:layout_row="1"
+        android:layout_column="0" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Average: "
+        android:id="@+id/textView5"
+        android:layout_row="2"
+        android:layout_column="0" />
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="384dp"
+        android:id="@+id/fuelListView"
+        android:layout_row="3"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:longClickable="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Добавить"
+        android:id="@+id/button"
+        android:layout_row="4"
+        android:layout_column="0"
+        android:onClick="addBtnClick"
+        android:layout_columnSpan="3" />
+</GridLayout>
