@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world"
+        android:text="Add new item"
         android:id="@+id/textView" />
 
     <TextView
@@ -68,7 +68,6 @@
         android:id="@+id/editTextOdo"
         android:layout_alignBottom="@+id/textView4"
         android:layout_centerHorizontal="true"
-        android:text="0"
         android:inputType="number" />
 
     <Button

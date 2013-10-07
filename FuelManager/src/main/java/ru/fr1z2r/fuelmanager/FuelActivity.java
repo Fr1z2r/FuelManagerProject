@@ -1,16 +1,22 @@
 package ru.fr1z2r.fuelmanager;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+
+import static ru.fr1z2r.fuelmanager.ContextMenuItems.Delete;
 
 /**
  * Created by Fr1z2r on 23.09.13.
@@ -18,11 +24,14 @@ import java.util.Collections;
 public class FuelActivity extends Activity {
 
     private int carId;
+    ArrayAdapter<FuelInfo> adapter;
+    private int selected=0;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fuel);
+
 
         UpdateLayout();
     }
@@ -33,7 +42,7 @@ public class FuelActivity extends Activity {
         TextView textViewLast5=(TextView)findViewById(R.id.textViewLast5);
         TextView textViewAvg=(TextView)findViewById(R.id.textViewAvg);
         ListView fuelListView=(ListView)findViewById(R.id.fuelListView);
-
+        registerForContextMenu(fuelListView);
 
         DbHelper db=new DbHelper(this);
         String car=getIntent().getExtras().getString("Car");
@@ -44,7 +53,7 @@ public class FuelActivity extends Activity {
         //Collections.reverse(fiList);
         textViewLast5.setText(Double.toString(CalcAvgRange(fiList,5)));
         textViewAvg.setText(Double.toString(CalcAvgRange(fiList,fiList.size())));
-        ArrayAdapter<FuelInfo> adapter=new ArrayAdapter<FuelInfo>(this,android.R.layout.simple_list_item_1,fiList);
+        adapter=new ArrayAdapter<FuelInfo>(this,android.R.layout.simple_list_item_1,fiList);
         fuelListView.setAdapter(adapter);
 
 
@@ -56,6 +65,32 @@ public class FuelActivity extends Activity {
         intent.putExtra("CarId",carId);
         startActivityForResult(intent, 1);
        // UpdateLayout();
+
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu,View v,ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu,v,menuInfo);
+        //menu.add(Menu.NONE, ContextMenuItems.Details.ordinal(), Menu.NONE, "Details");
+        menu.add(Menu.NONE, Delete.ordinal(),Menu.NONE,"Delete");
+        AdapterView.AdapterContextMenuInfo adapterContextMenuInfo=(AdapterView.AdapterContextMenuInfo)menuInfo;
+        selected=adapter.getItem(adapterContextMenuInfo.position).Id;
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        switch (ContextMenuItems.values()[item.getItemId()])
+        {
+            case Delete:
+             DbHelper db=new DbHelper(this);
+                db.DeleteFuelInfo(selected);
+                UpdateLayout();
+                default:
+                    return super.onContextItemSelected(item);
+        }
 
     }
 

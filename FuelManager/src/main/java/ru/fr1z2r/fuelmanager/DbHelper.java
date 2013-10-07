@@ -199,6 +199,12 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
 
     }
+    public void DeleteFuelInfo(int id)
+    {
+        SQLiteDatabase db=getWritableDatabase();
+        db.delete(FuelTable,FuelId+"=?",new String[]{Integer.toString(id)});
+        db.close();
+    }
 
     private FuelInfo FillFuelInfoFromCursor(Cursor c)
     {
